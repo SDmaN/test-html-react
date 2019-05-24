@@ -3,7 +3,22 @@ import { createStore, createEvent, createEffect } from 'effector';
 const updateEditableValue = createEvent('update editable value');
 const resetEditables = createEvent('reset editables');
 
-export const editables = createStore([{ id: 1, value: 'a' }])
+const initialState = [
+  {
+    id: 1,
+    value: 'I am simple div'
+  },
+  {
+    id: 2,
+    value: 'And I am a button'
+  },
+  {
+    id: 3,
+    value: 'Go to Linguatrip'
+  }
+];
+
+export const editables = createStore(initialState)
   .on(updateEditableValue, (state, payload) => {
     const { editableId, newValue } = payload;
 
@@ -28,7 +43,7 @@ editables.watch((state) => {
 export const updateEditable = createEffect('update editable on server')
   .use((params) => {
     return new Promise((resolve) => {
-      setTimeout(() => resolve(params.newValue), 1000); // mock of server work
+      setTimeout(() => resolve(params.newValue), 500); // mock of server work
     });
   });
 

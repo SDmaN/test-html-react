@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const useEditable = (editableId, sourceValue, handleSave) => {
   const [editableValue, setEditableValue] = useState(sourceValue);
   const [changedValue, setChangedValue] = useState(sourceValue);
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    setEditableValue(sourceValue);
+    setChangedValue(sourceValue);
+  }, [sourceValue]);
 
   const edit = () => setIsEditing(true);
 
